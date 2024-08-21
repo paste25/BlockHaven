@@ -3,7 +3,7 @@ import { cryptoData } from '../Store/DataStore'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
-  const {currency, setCurrency}=useContext(cryptoData)
+  const { setCurrency }=useContext(cryptoData)
   
   function handleCurrencyChnage(e){
     const newCurrency=e.target.value;

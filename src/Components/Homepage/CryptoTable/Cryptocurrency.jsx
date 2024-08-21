@@ -2,8 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { cryptoData } from '../../../Store/DataStore'
 import Cryptorow from './Cryptorow'
 import Pagination from '@mui/material/Pagination'
-const LoadingBarLinear = React.lazy(() => import("../../LoadingBarLinear"));
-
+import LoadingBarLinear from '../../LoadingBarLinear'
 
 const Cryptocurrency = () => {
   const { allCoins, currency, fetching } = useContext(cryptoData)

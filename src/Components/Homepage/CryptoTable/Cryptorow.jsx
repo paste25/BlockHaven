@@ -1,13 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
 const Cryptorow = ({ coin, currency }) => {
   let navigate = useNavigate()
-
   const handleRowClick = () => {
     navigate(`/coin/${coin.id}`);
   };
-
   const formatNumber = (num) => {
     if(num >= 1e15){
       return (num / 1e15).toFixed(2) + 'Q'
