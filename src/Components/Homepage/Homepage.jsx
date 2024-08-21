@@ -1,7 +1,7 @@
 import React, { useContext }from 'react'
-import banner1 from "../../assets/banner1.jpg"
-import TrendingCarousel from './TrendingCarousel'
-import Cryptocurrency from './CryptoTable/Cryptocurrency'
+import banner1 from "../../assets/banner1.jpg";
+import TrendingCarousel from './TrendingCarousel';
+import Cryptocurrency from './CryptoTable/Cryptocurrency';
 import { cryptoData } from '../../Store/DataStore'
 
 const Homepage = () => {

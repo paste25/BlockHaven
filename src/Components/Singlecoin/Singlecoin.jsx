@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { cryptoData } from "../../Store/DataStore"
 import CoinDesc from "./CoinDesc"
-import LoadingBarLinear from "../LoadingBarLinear"
+const LoadingBarLinear = React.lazy(() => import("../LoadingBarLinear"));
 import CoinChart from "./CoinChart"
-import LoadingBarCircular from "../LoadingBarCircular"
+const LoadingBarCircular = React.lazy(() => import("../LoadingBarCircular"));
+
 
 
 const Singlecoin = () => {
