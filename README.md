@@ -5,6 +5,8 @@ https://block-haven.netlify.app/
 BlockHaven is a responsive cryptocurrency tracking website built with React and Vite. The application
 dynamically fetches live data using an API and displays it in an interactive carousel format.
 
+Live Data Fetching
+
 Responsive Design
 
 Interactive Carousel
