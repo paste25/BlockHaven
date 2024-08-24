@@ -14,49 +14,66 @@ const DataStore = (props) => {
   const [days, setDays] = useState(30)
 
   const options = {
+    method: 'GET',
     headers: {
       accept: 'application/json',
       'x-cg-demo-api-key': import.meta.env.VITE_API_KEY
     }
   };
-  
-  async function getTrending(){
-    await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`, options)
-    .then(function (response) {
-      SetTrendingCoins(response.data);
+
+  async function getTrending() {
+    try {
+      let response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`, options)
+      let data = await response.json()
+      SetTrendingCoins(data);
       setFetching(false)
-    })
-  }
-  async function getAllCoins(){
-   await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&page=1&sparkline=false`, options)
-    .then(function (response) {
-      SetAllCoins(response.data)
-      setFetching(false)
-    })
     }
-
-  async function getSingleCoin(id){
-       await axios.get(`https://api.coingecko.com/api/v3/coins/${id}`, options)
-       .then(function (response) {
-        setCoin(response.data);
-       })
+    catch (err) {
+      console.log(err)
+    }
+  }
+  async function getAllCoins() {
+    try {
+      let response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&page=1&sparkline=false`, options)
+      let data = await response.json()
+      SetAllCoins(data)
+      setFetching(false)
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
 
-  async function getHistoricalChart(id){
-       await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency.toLocaleLowerCase()}&days=${days}&interval=daily`, options)
-      .then(function (response) {
-      setChartData(response.data.prices)
-    })
+  async function getSingleCoin(id) {
+    try {
+      let response = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`, options)
+      let data = await response.json()
+      setCoin(data);
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
-  
-  useEffect(()=>{
+
+  async function getHistoricalChart(id) {
+    try {
+      let response = await fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency.toLocaleLowerCase()}&days=${days}&interval=daily`, options)
+      let data = await response.json()
+      setChartData(data.prices)
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
     getAllCoins()
     getTrending()
   }, [currency])
 
 
   return (
-    <cryptoData.Provider value={{currency, setCurrency, trendingCoins, allCoins, getSingleCoin, coin, getHistoricalChart, chartData, fetching , days, setDays}}>
+    <cryptoData.Provider value={{ currency, setCurrency, trendingCoins, allCoins, getSingleCoin, coin, getHistoricalChart, chartData, fetching, days, setDays }}>
       {props.children}
     </cryptoData.Provider>
   )
